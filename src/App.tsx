@@ -10,13 +10,15 @@ import {
   PenTool, 
   Feather, 
   Award, 
+  ChevronLeft,
   ChevronRight, 
   ShieldCheck, 
   Calendar,
   Lock,
   Bookmark,
   Share2,
-  X
+  X,
+  Star
 } from 'lucide-react';
 import { IMAGES, USE_CASES, BONUS_ITEMS, INFINITE_CAROUSEL_IMAGES } from './data';
 
@@ -37,9 +39,52 @@ const SHOWCASE_IMAGES = [
   'https://i.ibb.co/fVr8t3dM/9.png'
 ];
 
+const TESTIMONIALS = [
+  {
+    name: 'Juliana Silva',
+    age: '24 anos',
+    city: 'São Paulo - SP',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    rating: 5,
+    text: 'Eu queria algo diferente para o nosso aniversário de namoro e as artes do Kit salvaram! Editei tudo pelo celular em 10 minutos, adicionei nossas fotos e mandei imprimir num papel de gramatura alta. Meu namorado chorou de emoção quando viu! Melhor compra que já fiz.'
+  },
+  {
+    name: 'Mateus Ramos',
+    age: '27 anos',
+    city: 'Curitiba - PR',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    rating: 5,
+    text: 'Sempre tive muita dificuldade para criar declarações bonitas ou presentes criativos. O Kit facilitou tudo demais. O modelo de Jornal do Amor e os envelopes prontos são lindos. Imprimi tudo em casa e ficou com uma qualidade profissional inacreditável. Vale cada centavo!'
+  },
+  {
+    name: 'Camila & Lucas',
+    age: '25 anos',
+    city: 'Belo Horizonte - MG',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80',
+    rating: 5,
+    text: 'As artes são de extremo bom gosto, bem diferentes desses designs amadores que a gente vê por aí. Os bônus de cartas secretas e raspadinhas de encontro são super divertidos. Estamos usando para dar uma movimentada na rotina e tem sido maravilhoso!'
+  },
+  {
+    name: 'Thiago Almeida',
+    age: '29 anos',
+    city: 'Rio de Janeiro - RJ',
+    avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&auto=format&fit=crop&q=80',
+    rating: 5,
+    text: 'Comprei o Kit Completo de R$ 37,00 e o acesso chegou na hora no meu e-mail. Os templates são muito fáceis de editar no Canva grátis. Fiz uma surpresa no quarto cheia de cartinhas e polaroids que criei lá. Minha esposa amou o detalhe e o capricho.'
+  }
+];
+
 export default function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutPrice, setCheckoutPrice] = useState(37);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  useEffect(() => {
+    const slideTimer = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 6000);
+    return () => clearInterval(slideTimer);
+  }, []);
 
   // Countdown timer for scarcity and higher conversions
   const [hours, setHours] = useState(1);
@@ -62,6 +107,14 @@ export default function App() {
   }, []);
 
   const openCheckout = (price: number) => {
+    if (price === 37) {
+      window.location.href = "https://pay.wiapy.com/2sdhbAnLqC";
+      return;
+    }
+    if (price === 10) {
+      window.location.href = "https://pay.wiapy.com/YVWVqlcWL";
+      return;
+    }
     setCheckoutPrice(price);
     setIsCheckoutOpen(true);
   };
@@ -420,44 +473,59 @@ export default function App() {
           {/* Block 1: Digital */}
           <div className="bg-white rounded-2xl border border-vintage-beige overflow-hidden shadow-md flex flex-col justify-between p-6 md:p-8 transition-all hover:shadow-xl">
             <div>
-              <div className="w-12 h-12 rounded-full bg-wine-red/5 flex items-center justify-center text-wine-red mb-6 border border-wine-red/10">
-                <Smartphone className="w-6 h-6" />
-              </div>
-              <h3 className="font-serif-elegant font-bold text-xl md:text-2xl text-stone-950 mb-3">
+              <h3 className="font-serif-elegant font-bold text-xl md:text-2xl text-stone-950 mb-3 text-center">
                 Use no digital
               </h3>
-              <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed mb-6">
+              <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed mb-6 text-center">
                 Personalize e envie pelo WhatsApp, publique nos stories do Instagram ou crie uma linda sequência romântica cronológica para emocionar todos os seus seguidores.
               </p>
             </div>
             
-            <div className="mt-4 pt-4 border-t border-stone-150">
-              <img
-                src={IMAGES.digitalVsPrint}
-                alt="Use canva templates no digital"
-                referrerPolicy="no-referrer"
-                className="w-full aspect-[16/10] object-cover rounded-lg border border-stone-200"
-              />
+            <div className="mt-4 pt-4 border-t border-stone-150 flex flex-col items-center">
+              {/* Mini Smartphone Mockup for the Wistia Video */}
+              <div className="w-full max-w-[135px] sm:max-w-[150px] mx-auto relative">
+                {/* Smartphone Shell Frame */}
+                <div className="relative border-[6px] border-stone-900 rounded-[24px] shadow-md bg-stone-900 ring-1 ring-stone-950/10">
+                  {/* Speaker Receiver & Camera Island */}
+                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-2 bg-stone-950 rounded-full z-30 flex items-center justify-between px-1.5">
+                    <div className="w-0.5 h-0.5 bg-stone-800 rounded-full" />
+                    <div className="w-3 h-0.5 bg-stone-800 rounded-full" />
+                    <div className="w-0.5 h-0.5 bg-[#121c2c] rounded-full" />
+                  </div>
+
+                  {/* Inner Screen Display (9:19 Aspect Ratio Matches the Portrait Video) */}
+                  <div className="relative w-full aspect-[9/19] bg-white rounded-[18px] overflow-hidden">
+                    <iframe
+                      src="https://fast.wistia.net/embed/iframe/b0p70390w2"
+                      title="Demonstração Usabilidade Digital"
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
+                      frameBorder="0"
+                      className="absolute inset-0 w-full h-full bg-white rounded-[18px]"
+                    />
+                  </div>
+
+                  {/* iOS System Indicator Bar (Bottom) */}
+                  <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-10 h-0.5 bg-stone-800 rounded-full z-30" />
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Block 2: Printed Keppsakes */}
           <div className="bg-white rounded-2xl border border-vintage-beige overflow-hidden shadow-md flex flex-col justify-between p-6 md:p-8 transition-all hover:shadow-xl">
             <div>
-              <div className="w-12 h-12 rounded-full bg-vintage-gold/10 flex items-center justify-center text-vintage-gold-dark mb-6 border border-vintage-gold/20">
-                <Printer className="w-6 h-6" />
-              </div>
-              <h3 className="font-serif-elegant font-bold text-xl md:text-2xl text-stone-950 mb-3">
+              <h3 className="font-serif-elegant font-bold text-xl md:text-2xl text-stone-950 mb-3 text-center">
                 Ou transforme em presente físico
               </h3>
-              <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed mb-6">
+              <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed mb-6 text-center">
                 Baixe em PDF ou imagem e imprima como folha de carta rústica, cartão postal, monte um belo quadro de cabeceira, uma revelação polaroid ou lembrança para embalar.
               </p>
             </div>
             
             <div className="mt-4 pt-4 border-t border-stone-150">
               <img
-                src={IMAGES.loveEnvelopeGold}
+                src="https://i.postimg.cc/5ykTD174/Chat-GPT-Image-6-de-jun-de-2026-18-46-32.png"
                 alt="Imprima cartas e lembranças de namoro"
                 referrerPolicy="no-referrer"
                 className="w-full aspect-[16/10] object-cover rounded-lg border border-stone-200"
@@ -580,6 +648,17 @@ export default function App() {
                 <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed">
                   {bonus.description}
                 </p>
+
+                {bonus.image && (
+                  <div className="mt-4 overflow-hidden rounded-xl border border-vintage-gold/20 bg-stone-50">
+                    <img
+                      src={bonus.image}
+                      alt={bonus.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="mt-5 pt-3 border-t border-stone-100 flex items-center gap-1.5 text-emerald-800 text-xs font-bold font-mono">
@@ -729,7 +808,94 @@ export default function App() {
 
           </div>
 
-          <p className="text-stone-500 text-[10px] sm:text-xs mt-6">
+          {/* TESTIMONIALS CAROUSEL (Real feedback below the cards) */}
+          <div className="mt-16 max-w-2xl mx-auto text-center relative z-10">
+            <span className="text-[10px] font-mono tracking-widest uppercase font-bold text-vintage-gold block mb-1">
+              DEPOIMENTOS DE QUEM JÁ ADQUIRIU
+            </span>
+            <h3 className="font-serif-elegant font-bold text-xl sm:text-2xl text-white mb-6">
+              O que dizem os namorados apaixonados
+            </h3>
+
+            {/* Carousel Frame */}
+            <div className="relative min-h-[225px] bg-black/30 border border-[#e1d8cb]/10 rounded-3xl p-6 sm:p-8 backdrop-blur-sm overflow-hidden flex flex-col justify-between group">
+              
+              {/* Star Rating in Gold */}
+              <div className="flex justify-center gap-1 mb-4">
+                {[...Array(TESTIMONIALS[currentTestimonial].rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-vintage-gold fill-current" />
+                ))}
+              </div>
+
+              {/* Slide Content with AnimatePresence for smooth transitions */}
+              <div className="relative px-6 sm:px-10">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentTestimonial}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex flex-col items-center"
+                  >
+                    <p className="text-stone-300 text-xs sm:text-sm font-sans-clean leading-relaxed italic mb-6">
+                      "{TESTIMONIALS[currentTestimonial].text}"
+                    </p>
+
+                    {/* Profile & Location */}
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={TESTIMONIALS[currentTestimonial].avatar}
+                        alt={TESTIMONIALS[currentTestimonial].name}
+                        referrerPolicy="no-referrer"
+                        className="w-10 h-10 rounded-full object-cover border border-vintage-gold/50"
+                      />
+                      <div className="text-left">
+                        <span className="font-serif-elegant font-bold text-sm text-white block">
+                          {TESTIMONIALS[currentTestimonial].name}
+                        </span>
+                        <span className="font-sans text-[10px] text-stone-400 block">
+                          {TESTIMONIALS[currentTestimonial].age} • {TESTIMONIALS[currentTestimonial].city}
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Left/Right Click Nav Handlers */}
+              <button
+                onClick={() => setCurrentTestimonial((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1))}
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition-all cursor-pointer opacity-70 group-hover:opacity-100"
+                aria-label="Depoimento Anterior"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length)}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white flex items-center justify-center transition-all cursor-pointer opacity-70 group-hover:opacity-100"
+                aria-label="Próximo Depoimento"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+              {/* Dots Selectors Indicators */}
+              <div className="flex justify-center gap-2 mt-6">
+                {TESTIMONIALS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentTestimonial(i)}
+                    className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                      i === currentTestimonial ? 'bg-vintage-gold w-4' : 'bg-white/20'
+                    }`}
+                  />
+                ))}
+              </div>
+
+            </div>
+          </div>
+
+          <p className="text-stone-500 text-[10px] sm:text-xs mt-8">
             🔒 Compra 100% protegida com criptografia SSL avançada de 256 bits.
           </p>
         </div>
@@ -762,6 +928,40 @@ export default function App() {
           <p className="text-stone-600 text-xs sm:text-base font-sans leading-relaxed max-w-xl mx-auto mb-10">
             Escolha um modelo, adicione suas memórias e frases românticas, e crie um presente ou post inesquecível para este Dia dos Namorados.
           </p>
+
+          {/* Guarantee Seal to Boost Conversions - Light Theme version */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-12 max-w-xl mx-auto bg-white border border-vintage-gold/30 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 text-left shadow-md"
+          >
+            {/* Guarantee Badge Stamp Design */}
+            <div className="relative shrink-0 flex items-center justify-center w-24 h-24 rounded-full border-4 border-vintage-gold bg-[#1e1b18] text-vintage-gold shadow-md">
+              <div className="absolute inset-1.5 border border-dashed border-vintage-gold/50 rounded-full" />
+              <div className="text-center z-10 flex flex-col items-center justify-center">
+                <span className="font-serif-elegant font-black text-2xl leading-none text-white block">7</span>
+                <span className="font-sans text-[8px] font-bold uppercase tracking-widest leading-none mt-0.5 text-vintage-gold">DIAS DE</span>
+                <span className="font-sans text-[9px] font-extrabold uppercase tracking-wide leading-none mt-0.5 text-white">GARANTIA</span>
+              </div>
+              {/* Star decorations */}
+              <div className="absolute top-1 left-1.5 text-[6px]">★</div>
+              <div className="absolute top-1 right-1.5 text-[6px]">★</div>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <ShieldCheck className="w-5 h-5 text-vintage-gold shrink-0" />
+                <h4 className="font-serif-elegant font-bold text-stone-900 text-base sm:text-lg">
+                  Garantia Incondicional de 7 Dias
+                </h4>
+              </div>
+              <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed">
+                Você tem 7 dias inteiros para testar e usar todas as artes no Canva. Se por qualquer motivo não se apaixonar pelos modelos, nós devolvemos seu dinheiro integralmente, sem perguntas ou burocracia.
+              </p>
+            </div>
+          </motion.div>
 
           <button
             onClick={() => openCheckout(37)}

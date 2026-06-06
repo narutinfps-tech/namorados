@@ -173,24 +173,27 @@ export const PINTEREST_ITEMS: PinterestItem[] = [
 export const BONUS_ITEMS: BonusItem[] = [
   {
     id: 'b1',
-    title: 'Cartinhas românticas prontas',
+    title: 'Cartinhas de Amor Editáveis',
     badge: 'BÔNUS 01',
-    description: 'Textos prontos e emocionantes estruturados especificamente para namorado, namorada, marido, esposa ou noivos.',
-    iconName: 'HeartHandshake'
+    description: 'Modelos prontos no Canva de cartinhas dobráveis de amor para você editar com suas mensagens especiais e imprimir.',
+    iconName: 'HeartHandshake',
+    image: 'https://i.postimg.cc/VvF2gnM9/Chat-GPT-Image-6-de-jun-de-2026-18-22-55.png'
   },
   {
     id: 'b2',
     title: 'Guia de impressão',
     badge: 'BÔNUS 02',
     description: 'Orientações simples e práticas sobre papéis adequados, tamanhos corretos e configurações de impressora para cartas, polaroids e quadros ficarem profissionais.',
-    iconName: 'Printer'
+    iconName: 'Printer',
+    image: 'https://i.postimg.cc/rmj9YJhB/Chat-GPT-Image-6-de-jun-de-2026-18-27-05.png'
   },
   {
     id: 'b3',
     title: 'Ideias de surpresa',
     badge: 'BÔNUS 03',
     description: 'Ideias criativas e baratas de como preparar a entrega física das artes para surpreender e arrancar lágrimas de emoção.',
-    iconName: 'Sparkles'
+    iconName: 'Sparkles',
+    image: 'https://i.postimg.cc/PJN1Vk8s/Chat-GPT-Image-6-de-jun-de-2026-18-30-04.png'
   }
 ];
 

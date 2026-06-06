@@ -28,6 +28,7 @@ export interface BonusItem {
   badge: string;
   description: string;
   iconName: string;
+  image?: string;
 }
 
 export interface FaqItem {
