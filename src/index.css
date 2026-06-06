@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Alex+Brush&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif-elegant: "Playfair Display", serif;
+  --font-handwritten: "Alex Brush", cursive;
+  --font-sans-clean: "Poppins", sans-serif;
+  
+  --color-vintage-beige: #f3efe9;
+  --color-vintage-cream: #faf7f2;
+  --color-vintage-gold: #cea972;
+  --color-vintage-gold-dark: #a98048;
+  --color-wine-red: #8a1c1c;
+  --color-wine-dark: #580d0d;
+  --color-elegant-black: #1e1b18;
+  --color-burned-rose: #bd7f81;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans-clean);
+    background-color: var(--color-vintage-cream);
+    color: var(--color-elegant-black);
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbar for an elegant feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf7f2;
+}
+::-webkit-scrollbar-thumb {
+  background: #bd7f81;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8a1c1c;
+}
+
+/* Custom vintage paper card style */
+.vintage-card {
+  position: relative;
+  background-color: #faf7f2;
+  border: 1px solid #e1d8cb;
+  box-shadow: 0 4px 20px rgba(30, 27, 24, 0.05);
+}
+
+.vintage-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(206, 169, 114, 0.2);
+  margin: 4px;
+  pointer-events: none;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+

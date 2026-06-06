@@ -1,0 +1,6 @@
+{
+  "name": "Kit Memórias do Amor",
+  "description": "Página de vendas premium, minimalista e romântica para o Kit Memórias do Amor, com mais de 50 artes editáveis no Canva.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
