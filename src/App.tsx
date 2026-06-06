@@ -116,10 +116,45 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-stone-600 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-light leading-relaxed mb-10"
+            className="text-stone-600 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-light leading-relaxed mb-6"
           >
             Mais de 50 artes românticas editáveis no Canva para postar, enviar ou imprimir e surpreender quem você ama.
           </motion.p>
+
+          {/* WISTIA PRESENTATION VIDEO (9:20 PORTRAIT IN REFINED SMARTPHONE FRAME) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-6 mb-10 max-w-[290px] sm:max-w-[330px] mx-auto w-full relative z-10"
+          >
+            {/* Smartphone Shell Frame */}
+            <div className="relative mx-auto border-[10px] sm:border-[12px] border-stone-900 rounded-[40px] sm:rounded-[46px] shadow-2xl bg-stone-900 ring-4 ring-stone-950/20">
+              {/* Speaker Receiver & Camera Island */}
+              <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-stone-950 rounded-full z-30 flex items-center justify-between px-3.5">
+                <div className="w-1.5 h-1.5 bg-stone-800 rounded-full" />
+                <div className="w-8 h-1 bg-stone-800 rounded-full" />
+                <div className="w-2 h-2 bg-[#121c2c] rounded-full ring-1 ring-stone-900/50 flex items-center justify-center">
+                  <div className="w-0.5 h-0.5 bg-indigo-500/50 rounded-full" />
+                </div>
+              </div>
+
+              {/* Inner Screen Display (9:20 Aspect Ratio Matches the Video) */}
+              <div className="relative w-full aspect-[9/20] bg-white rounded-[30px] sm:rounded-[34px] overflow-hidden">
+                <iframe
+                  src="https://fast.wistia.net/embed/iframe/fx6o2lhga7"
+                  title="Wistia Video Player"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                  frameBorder="0"
+                  className="absolute inset-0 w-full h-full bg-white rounded-[30px] sm:rounded-[34px]"
+                />
+              </div>
+
+              {/* iOS System Indicator Bar (Bottom) */}
+              <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-24 h-1 bg-stone-800 rounded-full z-30" />
+            </div>
+          </motion.div>
 
           {/* Action Call for the purchase modal */}
           <motion.div
@@ -140,40 +175,6 @@ export default function App() {
             </p>
           </motion.div>
         </div>
-
-        {/* WISTIA PRESENTATION VIDEO (9:16 PORTRAIT FORMAT WITH SMARTPHONE FRAME) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-12 max-w-[320px] sm:max-w-[340px] mx-auto w-full relative z-10"
-        >
-          {/* Smartphone Frame Outer shell */}
-          <div className="relative mx-auto border-[10px] sm:border-[12px] border-stone-900 rounded-[38px] sm:rounded-[44px] shadow-2xl bg-stone-900">
-            {/* Front speaker receiver line */}
-            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-16 h-1 bg-stone-800 rounded-full z-30" />
-            
-            {/* Punch hole camera */}
-            <div className="absolute top-4.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-stone-950 rounded-full z-30 ring-1 ring-stone-800/50 flex items-center justify-center">
-              <div className="w-1 h-1 bg-indigo-950/40 rounded-full" />
-            </div>
-
-            {/* Inner screen content container */}
-            <div className="relative w-full aspect-[9/16] bg-white rounded-[28px] sm:rounded-[32px] overflow-hidden">
-              <iframe
-                src="https://fast.wistia.net/embed/iframe/fx6o2lhga7"
-                title="Wistia Video Player"
-                allow="autoplay; fullscreen"
-                allowFullScreen
-                frameBorder="0"
-                className="absolute inset-0 w-full h-full rounded-[28px] sm:rounded-[32px] bg-white"
-              />
-            </div>
-
-            {/* Bottom iOS-style home indicator bar */}
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-stone-700 rounded-full z-30" />
-          </div>
-        </motion.div>
 
         {/* Vintage Scrapbook Collage mockup layout for Hero */}
         <motion.div 
