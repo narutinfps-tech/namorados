@@ -15,15 +15,27 @@ import {
   Calendar,
   Lock,
   Bookmark,
-  Share2
+  Share2,
+  X
 } from 'lucide-react';
 import { IMAGES, USE_CASES, BONUS_ITEMS, INFINITE_CAROUSEL_IMAGES } from './data';
 
 // Component imports
 import Carousel from './components/Carousel';
-import MasonryGallery from './components/MasonryGallery';
 import FaqSection from './components/FaqSection';
 import CheckoutModal from './components/CheckoutModal';
+
+const SHOWCASE_IMAGES = [
+  'https://i.ibb.co/HfkCxZ9V/1.png',
+  'https://i.ibb.co/rKx46HFz/2.png',
+  'https://i.ibb.co/MymGCTMw/3.png',
+  'https://i.ibb.co/Xr1GdmVs/4.png',
+  'https://i.ibb.co/qYt14nMG/5.png',
+  'https://i.ibb.co/b5pXWdRF/6.png',
+  'https://i.ibb.co/nWhzwDx/7.png',
+  'https://i.ibb.co/nMDjLjBV/8.png',
+  'https://i.ibb.co/fVr8t3dM/9.png'
+];
 
 export default function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
@@ -362,8 +374,43 @@ export default function App() {
           <div className="w-12 h-1 bg-vintage-gold mx-auto mt-6" />
         </div>
 
-        {/* Pinterest Gallery Component */}
-        <MasonryGallery />
+        {/* Showcase Images list (one under another) */}
+        <div className="flex flex-col items-center gap-12 max-w-4xl mx-auto px-4 sm:px-6">
+          {SHOWCASE_IMAGES.map((imgUrl, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="w-full bg-[#faf8f5] p-3 sm:p-5 pb-6 sm:pb-8 rounded-3xl border border-vintage-gold/20 shadow-xl overflow-hidden relative group"
+            >
+              {/* Retro decorative tape details at the top of the "Polaroid" mockup frame */}
+              {index % 2 === 0 ? (
+                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-6.5 bg-vintage-gold/15 rotate-[1deg] z-10 shadow-sm" style={{ backdropFilter: 'blur(1px)' }} />
+              ) : (
+                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-24 h-6.5 bg-stone-200/50 -rotate-[1.5deg] z-10 shadow-sm" style={{ backdropFilter: 'blur(1px)' }} />
+              )}
+              
+              <div className="relative mt-5 overflow-hidden rounded-2xl bg-white border border-stone-100 shadow-inner">
+                <img
+                  src={imgUrl}
+                  alt={`Modelo de Arte ${index + 1}`}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-auto object-cover transition-transform duration-500 hover:scale-[1.01]"
+                />
+              </div>
+              <div className="text-center mt-5 sm:mt-6">
+                <span className="font-sans text-[10px] sm:text-xs font-bold text-wine-red uppercase tracking-widest block mb-1">
+                  Modelo {index + 1} de 50
+                </span>
+                <span className="font-serif-elegant text-stone-800 text-sm sm:text-base font-medium tracking-tight">
+                  Template Romântico Totalmente Editável no Canva
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* SEÇÃO 5 — DIGITAL E IMPRESSO */}
@@ -553,70 +600,130 @@ export default function App() {
           
           <Heart className="w-10 h-10 text-wine-red fill-current mx-auto mb-6 animate-pulse" />
 
-          {/* Golden frame look */}
-          <div className="max-w-xl mx-auto border-2 border-vintage-gold/30 p-8 sm:p-12 rounded-3xl bg-black/30 backdrop-blur-md relative">
+          {/* Two-column pricing selection */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left mt-8">
             
-            {/* Stamp decoration */}
-            <div className="absolute top-[-18px] left-1/2 -translate-x-1/2 bg-vintage-gold text-stone-950 text-[10px] font-bold uppercase tracking-widest py-1.5 px-6 rounded-full shadow-md">
-              Acesso Vitalício Imediato
-            </div>
-
-            <span className="font-handwritten text-4xl text-vintage-gold font-medium block mb-3 mt-2">
-              Pacote Memórias do Amor
-            </span>
-            <h2 className="font-serif-elegant font-bold text-3xl sm:text-4xl text-white tracking-tight mb-4">
-              Kit Memórias do Amor
-            </h2>
-            <p className="text-stone-400 text-xs sm:text-sm font-sans-clean leading-relaxed mb-6">
-              Mais de 50 modelos românticos editáveis para você postar, enviar pelo WhatsApp ou imprimir em alta definição por conta própria e emocionar quem você ama.
-            </p>
-
-            <div className="w-16 h-[1px] bg-vintage-gold/40 mx-auto mb-6" />
-
-            {/* Price section with contrast */}
-            <div className="mb-6">
-              <span className="text-stone-500 line-through text-sm">De R$ 67,00</span>
-              <div className="text-3xl sm:text-4xl font-serif-elegant font-bold text-vintage-gold mt-1">
-                Por apenas <strong className="text-white">R$ 37,00</strong>
+            {/* Card 1: Versão Essencial (R$ 10) */}
+            <div className="border border-[#e1d8cb]/20 p-6 sm:p-8 rounded-3xl bg-black/40 backdrop-blur-md relative flex flex-col justify-between hover:border-vintage-gold/20 transition-all duration-300">
+              <div>
+                <span className="text-[#a98048] text-[9px] font-mono tracking-widest uppercase font-bold block mb-2">OPÇÃO ESSENCIAL</span>
+                <h3 className="font-serif-elegant font-bold text-2xl text-white mb-2">Versão Essencial</h3>
+                <p className="text-stone-400 text-xs font-sans-clean leading-relaxed mb-6">
+                  Perfeito para quem quer uma surpresa rápida e minimalista com as artes essenciais de namoro.
+                </p>
+                
+                <div className="w-12 h-[1px] bg-vintage-gold/20 mb-6" />
+                
+                <ul className="space-y-3 font-sans text-xs text-stone-300 mb-8">
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-vintage-gold shrink-0" />
+                    <span><strong>15+ templates fundamentais</strong> (Stories e Feed)</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-vintage-gold shrink-0" />
+                    <span>100% Editável no Canva Grátis</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-vintage-gold shrink-0" />
+                    <span>Personalize fotos, textos e frases</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-vintage-gold shrink-0" />
+                    <span>Acesso imediato por e-mail</span>
+                  </li>
+                  <li className="flex items-center gap-2.5 opacity-40">
+                    <X className="w-4 h-4 text-stone-500 shrink-0" />
+                    <span className="line-through">Sem os 3 bônus exclusivos</span>
+                  </li>
+                  <li className="flex items-center gap-2.5 opacity-40">
+                    <X className="w-4 h-4 text-stone-500 shrink-0" />
+                    <span className="line-through">Sem moldes de cartas e envelopes</span>
+                  </li>
+                </ul>
               </div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 block mt-1.5">
-                ⚡ Pagamento único sem assinaturas
-              </span>
-            </div>
-
-            {/* CTA action buttons */}
-            <div className="space-y-4">
-              <button
-                onClick={() => openCheckout(37)}
-                className="w-full py-4 bg-wine-red hover:bg-[#a12323] text-white rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-lg shadow-wine-red/20 active:scale-[0.99] cursor-pointer"
-              >
-                Quero acessar agora
-              </button>
-
-              {/* Special Budget Offer Link */}
-              <div className="pt-3 border-t border-white/5">
+              
+              <div>
+                {/* Price block */}
+                <div className="mb-5 border-t border-white/5 pt-5">
+                  <div className="text-2xl font-serif-elegant font-bold text-vintage-gold">
+                    Apenas <strong className="text-white">R$ 10,00</strong>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-stone-400 block mt-1">
+                    ⚡ Pagamento único pelo Pix
+                  </span>
+                </div>
+                
                 <button
-                  type="button"
                   onClick={() => openCheckout(10)}
-                  className="text-stone-400 hover:text-vintage-gold text-xs transition-colors duration-200 underline underline-offset-4 cursor-pointer"
+                  className="w-full py-3 bg-[#3a3530] hover:bg-[#4d4741] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer active:scale-[0.99]"
                 >
-                  ou prefiro a versão essencial compacta por R$ 10,00
+                  Garantir por R$ 10,00
                 </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 text-center text-stone-400 text-[10px] mt-8 pt-6 border-t border-white/5">
-              <div>
-                <p className="font-bold text-white mb-0.5">Editável</p>
-                <span>No Canva Grátis</span>
+            {/* Card 2: Kit Completo Deluxe (R$ 37) */}
+            <div className="border-2 border-vintage-gold p-6 sm:p-8 rounded-3xl bg-[#28211b] backdrop-blur-md relative flex flex-col justify-between shadow-xl shadow-black/40 hover:scale-[1.01] transition-all duration-300">
+              {/* Highlight ribbon indicator */}
+              <div className="absolute top-[-15px] left-1/2 -translate-x-1/2 bg-vintage-gold text-stone-950 text-[10px] font-bold uppercase tracking-widest py-1 px-5 rounded-full shadow-md whitespace-nowrap">
+                🏆 O MAIS ESCOLHIDO E COMPLETO
               </div>
-              <div>
-                <p className="font-bold text-white mb-0.5 font-sans-clean">Imediato</p>
-                <span>Sua entrega no e-mail</span>
+              
+              <div className="pt-2">
+                <span className="text-wine-red text-[9px] font-mono tracking-widest uppercase font-bold block mb-2">COLEÇÃO TOTAL + TODOS OS BÔNUS</span>
+                <h3 className="font-serif-elegant font-bold text-2xl text-white mb-2">Kit Completo Deluxe</h3>
+                <p className="text-stone-300 text-xs font-sans-clean leading-relaxed mb-6">
+                  Nossa coleção oficial consagrada com mais de 50 artes completas e todos os mimos exclusivos.
+                </p>
+                
+                <div className="w-12 h-[1px] bg-vintage-gold/30 mb-6" />
+                
+                <ul className="space-y-3 font-sans text-xs text-stone-200 mb-8">
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span><strong>50+ templates completos</strong> (Feed, Stories, WhatsApp)</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span><strong>Moldes de Cartas e Envelopes</strong> românticos</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span><strong>Moldes de Quadros e Postais</strong> editáveis</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>Elementos vintage scrapbook (Polaroids e adesivos)</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span><strong>3 BÔNUS EXTRA INCLUSOS GRÁTIS</strong></span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>Acesso Vitalício Garantido + Suporte</span>
+                  </li>
+                </ul>
               </div>
+              
               <div>
-                <p className="font-bold text-white mb-0.5">Versátil</p>
-                <span>Digital & Impresso</span>
+                {/* Price block */}
+                <div className="mb-5 border-t border-white/10 pt-5">
+                  <span className="text-stone-400 line-through text-[11px]">De R$ 67,00</span>
+                  <div className="text-2xl sm:text-3xl font-serif-elegant font-bold text-vintage-gold mt-0.5">
+                    Apenas <strong className="text-white">R$ 37,00</strong>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 block mt-1">
+                    ⚡ Tudo liberado imediatamente por e-mail
+                  </span>
+                </div>
+                
+                <button
+                  onClick={() => openCheckout(37)}
+                  className="w-full py-3.5 bg-wine-red hover:bg-[#a12323] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md shadow-wine-red/25 cursor-pointer active:scale-[0.99]"
+                >
+                  Quero o Kit Completo
+                </button>
               </div>
             </div>
 
