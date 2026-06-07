@@ -399,8 +399,8 @@ export default function App() {
                   src={imgUrl}
                   alt={`Arte Exclusiva ${i + 1}`}
                   referrerPolicy="no-referrer"
-                  style={{ imageRendering: '-webkit-optimize-contrast' }}
-                  className="w-full h-full object-cover contrast-[1.05] saturate-[1.03] brightness-[1.01]"
+                  style={{ imageRendering: 'high-quality' }}
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
@@ -414,8 +414,8 @@ export default function App() {
                   src={imgUrl}
                   alt={`Arte Exclusiva ${i + 1}`}
                   referrerPolicy="no-referrer"
-                  style={{ imageRendering: '-webkit-optimize-contrast' }}
-                  className="w-full h-full object-cover contrast-[1.05] saturate-[1.03] brightness-[1.01]"
+                  style={{ imageRendering: 'high-quality' }}
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
@@ -704,8 +704,8 @@ export default function App() {
                     src={imgUrl}
                     alt={`Molde de Carta Premium ${i + 1}`}
                     referrerPolicy="no-referrer"
-                    style={{ imageRendering: '-webkit-optimize-contrast' }}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 contrast-[1.05] saturate-[1.03] brightness-[1.01]"
+                    style={{ imageRendering: 'high-quality' }}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Glassmorphic watermark tab */}
                   <span className="absolute bottom-2.5 left-2.5 px-3 py-1 bg-white/95 backdrop-blur-md rounded-lg text-[#580d0d] text-[10px] sm:text-xs font-bold border border-vintage-gold/20 shadow-sm">
@@ -725,8 +725,8 @@ export default function App() {
                     src={imgUrl}
                     alt={`Molde de Carta Premium ${i + 1}`}
                     referrerPolicy="no-referrer"
-                    style={{ imageRendering: '-webkit-optimize-contrast' }}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 contrast-[1.05] saturate-[1.03] brightness-[1.01]"
+                    style={{ imageRendering: 'high-quality' }}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Glassmorphic watermark tab */}
                   <span className="absolute bottom-2.5 left-2.5 px-3 py-1 bg-white/95 backdrop-blur-md rounded-lg text-[#580d0d] text-[10px] sm:text-xs font-bold border border-vintage-gold/20 shadow-sm">
