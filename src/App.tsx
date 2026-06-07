@@ -186,7 +186,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed top-16 right-4 sm:right-6 z-[9999] max-w-[280px] sm:max-w-xs bg-white/95 backdrop-blur-md text-stone-900 border border-vintage-gold/25 rounded-xl shadow-xl p-3 pr-8 flex items-center gap-2.5"
+            className="fixed top-12 right-4 sm:right-6 z-[9999] max-w-[280px] sm:max-w-xs bg-white/95 backdrop-blur-md text-stone-900 border border-vintage-gold/25 rounded-xl shadow-xl p-3 pr-8 flex items-center gap-2.5"
           >
             <div className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
               <Check className="w-3.5 h-3.5 stroke-[3]" />
@@ -378,14 +378,14 @@ export default function App() {
             Algumas das 50+ artes que você irá receber
           </h3>
           <p className="text-stone-500 text-xs sm:text-sm tracking-wide mt-1">
-            Passe o mouse para pausar • Clique na vitrine abaixo para testar a edição ao vivo
+            Arraste para o lado • Toque na vitrine abaixo para testar a edição ao vivo
           </p>
         </div>
 
         <div className="relative w-full overflow-hidden py-4 flex select-none">
-          {/* Ambient shading gradient covers */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-vintage-cream via-vintage-cream/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-vintage-cream via-vintage-cream/80 to-transparent z-10 pointer-events-none" />
+          {/* Ambient shading gradient covers - much narrower & subtler to keep images super sharp and not foggy */}
+          <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-16 md:w-28 bg-gradient-to-r from-vintage-cream via-vintage-cream/10 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-6 sm:w-16 md:w-28 bg-gradient-to-l from-vintage-cream via-vintage-cream/10 to-transparent z-10 pointer-events-none" />
 
           {/* Endless Marquee Inner flow */}
           <div className="animate-marquee flex gap-4 sm:gap-6 items-center">
@@ -393,13 +393,14 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`infinite-s1-${i}`}
-                className="w-32 sm:w-44 md:w-52 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
+                className="w-44 sm:w-56 md:w-64 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
               >
                 <img
                   src={imgUrl}
                   alt={`Arte Exclusiva ${i + 1}`}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
+                  className="w-full h-full object-cover contrast-[1.05] saturate-[1.03] brightness-[1.01]"
                 />
               </div>
             ))}
@@ -407,13 +408,14 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`infinite-s2-${i}`}
-                className="w-32 sm:w-44 md:w-52 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
+                className="w-44 sm:w-56 md:w-64 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
               >
                 <img
                   src={imgUrl}
                   alt={`Arte Exclusiva ${i + 1}`}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
+                  className="w-full h-full object-cover contrast-[1.05] saturate-[1.03] brightness-[1.01]"
                 />
               </div>
             ))}
@@ -685,9 +687,9 @@ export default function App() {
 
         {/* Endless Marquee Inner flow (Specific to the 8 Custom Love Letters) */}
         <div className="relative w-full overflow-hidden py-6 flex select-none">
-          {/* Ambient shading gradient covers */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-vintage-cream via-vintage-cream/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-vintage-cream via-vintage-cream/80 to-transparent z-10 pointer-events-none" />
+          {/* Ambient shading gradient covers - much narrower & subtler to keep images super sharp and not foggy */}
+          <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-16 md:w-28 bg-gradient-to-r from-vintage-cream via-vintage-cream/10 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-6 sm:w-16 md:w-28 bg-gradient-to-l from-vintage-cream via-vintage-cream/10 to-transparent z-10 pointer-events-none" />
 
           {/* Endless Marquee Inner flow */}
           <div className="animate-marquee flex gap-6 sm:gap-8 items-center">
@@ -695,14 +697,15 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`custom-letter-s1-${i}`}
-                className="w-48 sm:w-60 md:w-72 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
+                className="w-56 sm:w-68 md:w-80 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
               >
                 <div className="w-full h-full overflow-hidden rounded-xl relative bg-stone-50">
                   <img
                     src={imgUrl}
                     alt={`Molde de Carta Premium ${i + 1}`}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    style={{ imageRendering: '-webkit-optimize-contrast' }}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 contrast-[1.05] saturate-[1.03] brightness-[1.01]"
                   />
                   {/* Glassmorphic watermark tab */}
                   <span className="absolute bottom-2.5 left-2.5 px-3 py-1 bg-white/95 backdrop-blur-md rounded-lg text-[#580d0d] text-[10px] sm:text-xs font-bold border border-vintage-gold/20 shadow-sm">
@@ -715,14 +718,15 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`custom-letter-s2-${i}`}
-                className="w-48 sm:w-60 md:w-72 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
+                className="w-56 sm:w-68 md:w-80 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
               >
                 <div className="w-full h-full overflow-hidden rounded-xl relative bg-stone-50">
                   <img
                     src={imgUrl}
                     alt={`Molde de Carta Premium ${i + 1}`}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    style={{ imageRendering: '-webkit-optimize-contrast' }}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 contrast-[1.05] saturate-[1.03] brightness-[1.01]"
                   />
                   {/* Glassmorphic watermark tab */}
                   <span className="absolute bottom-2.5 left-2.5 px-3 py-1 bg-white/95 backdrop-blur-md rounded-lg text-[#580d0d] text-[10px] sm:text-xs font-bold border border-vintage-gold/20 shadow-sm">
