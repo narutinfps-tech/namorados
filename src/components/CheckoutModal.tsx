@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { X, Check, ShieldCheck, CreditCard, Landmark, Send, Calendar, Heart, AlertCircle, Sparkles } from 'lucide-react';
+import { X, Check, ShieldCheck, CreditCard, Landmark, Send, Calendar, Heart, AlertCircle, Sparkles, Phone } from 'lucide-react';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -15,6 +15,7 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
   const [paymentMethod, setPaymentMethod] = useState<'pix' | 'cartao'>('pix');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('narutinfps@gmail.com');
+  const [phone, setPhone] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [cardExpiry, setCardExpiry] = useState('');
   const [cardCvv, setCardCvv] = useState('');
@@ -44,8 +45,8 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
 
   const handleSimulatePayment = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName || !email) {
-      alert('Por favor, preencha seu nome e e-mail para receber as artes!');
+    if (!fullName || !email || !phone) {
+      alert('Por favor, preencha seu nome, e-mail e WhatsApp para receber as artes!');
       return;
     }
 
@@ -168,7 +169,7 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
             {/* Custom Payment Form */}
             <form onSubmit={handleSimulatePayment} className="mt-5 space-y-4">
               {/* Core contacts */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <div>
                   <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">
                     Nome Completo
@@ -182,18 +183,33 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
                     className="w-full px-3 py-2 border border-stone-200 rounded-lg text-xs font-sans bg-[#faf7f2]/40 focus:outline-none focus:ring-1 focus:ring-wine-red text-stone-800"
                   />
                 </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">
-                    Seu E-mail (Recebimento)
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="ex@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3 py-2 border border-stone-200 rounded-lg text-xs font-sans bg-[#faf7f2]/40 focus:outline-none focus:ring-1 focus:ring-wine-red text-stone-800"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">
+                      Seu E-mail (Recebimento)
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="ex@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3 py-2 border border-stone-200 rounded-lg text-xs font-sans bg-[#faf7f2]/40 focus:outline-none focus:ring-1 focus:ring-wine-red text-stone-800"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">
+                      WhatsApp / Celular com DDD
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="(11) 99999-9999"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full px-3 py-2 border border-stone-200 rounded-lg text-xs font-sans bg-[#faf7f2]/40 focus:outline-none focus:ring-1 focus:ring-wine-red text-stone-800"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -228,7 +244,7 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
                     </span>
                   </div>
                   <p className="text-[11px] text-stone-600 font-sans-clean leading-relaxed mt-1">
-                    Pague via Pix nas próximas horas para liberar o acesso imediatamente em seu e-mail.
+                    Pague via Pix para liberar o acesso imediatamente em seu **e-mail** e **WhatsApp**.
                   </p>
                 </div>
               ) : (
@@ -331,7 +347,7 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
               Validando e Processando...
             </h4>
             <p className="text-xs text-stone-500 font-sans max-w-xs leading-relaxed">
-              Estamos integrando os servidores do Canva e preparando sua caixa de surpresas no e-mail <strong>{email}</strong>
+              Estamos integrando os servidores do Canva e preparando sua caixa de surpresas para envio no celular <strong>{phone}</strong> e e-mail <strong>{email}</strong>
             </p>
           </div>
         )}
@@ -350,16 +366,21 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
             </p>
 
             <div className="bg-vintage-cream border border-vintage-gold/30 rounded-xl p-5 mb-6 max-w-sm w-full text-left">
-              <h5 className="text-xs font-bold text-stone-800 flex items-center gap-1.5">
+              <h5 className="text-xs font-bold text-stone-800 flex items-center gap-1.5 border-b border-vintage-gold/25 pb-1.5 mb-2">
                 <Sparkles className="w-3.5 h-3.5 text-vintage-gold fill-current" />
-                Instruções de Acesso Imediato:
+                Acesso Enviado com Sucesso:
               </h5>
-              <p className="text-[11px] text-stone-600 mt-2 leading-relaxed">
-                1. Enviamos um e-mail de boas-vindas para <strong>{email}</strong> com as credenciais.
-              </p>
-              <p className="text-[11px] text-stone-600 mt-1 leading-relaxed">
-                2. Clique no botão dourado abaixo para carregar todos os 50 designs diretamente no seu painel pessoal do Canva.
-              </p>
+              <div className="space-y-2 text-[11px] text-[#4d3a22] font-sans leading-relaxed">
+                <p className="flex items-start gap-1.5">
+                  <span className="font-bold text-wine-red">➔ WhatsApp:</span> Enviamos a mensagem de confirmação com seu link exclusivo para o número <strong className="text-stone-900">{phone}</strong>.
+                </p>
+                <p className="flex items-start gap-1.5">
+                  <span className="font-bold text-wine-red">➔ E-mail:</span> Acesso completo direcionado para <strong className="text-stone-900">{email}</strong> com as credenciais.
+                </p>
+                <p className="flex items-start gap-1.5">
+                  <span className="font-bold text-emerald-700">➔ Canva:</span> Toque no botão abaixo para carregar os designs instantaneamente.
+                </p>
+              </div>
             </div>
 
             <div className="space-y-2.5 w-full">

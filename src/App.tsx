@@ -23,7 +23,6 @@ import {
 import { IMAGES, USE_CASES, BONUS_ITEMS, INFINITE_CAROUSEL_IMAGES } from './data';
 
 // Component imports
-import Carousel from './components/Carousel';
 import FaqSection from './components/FaqSection';
 import CheckoutModal from './components/CheckoutModal';
 
@@ -242,8 +241,8 @@ export default function App() {
               <Heart className="w-5 h-5 fill-current" /> Quero criar minha homenagem
             </button>
 
-            <p className="text-xs text-stone-500 font-mono tracking-wide uppercase">
-              Acesso imediato • Editável no Canva • Digital e impresso
+            <p className="text-[11px] text-stone-500 font-mono tracking-wide uppercase">
+              Acesso imediato por E-mail e WhatsApp • Editável no Canva • Digital e impresso
             </p>
           </motion.div>
         </div>
@@ -355,67 +354,6 @@ export default function App() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* SEÇÃO 2 — CARROSSEL DE PRÉVIAS */}
-      <section className="bg-vintage-beige/35 border-t border-b border-vintage-beige py-20 relative">
-        <div className="w-full max-w-7xl mx-auto px-6 text-center">
-          <span className="font-handwritten text-3xl font-medium text-wine-red block mb-3">
-            Explorar Ateliê
-          </span>
-          <h2 className="font-serif-elegant font-bold text-3xl sm:text-4xl text-elegant-black tracking-tight mb-4">
-            Escolha, edite e surpreenda
-          </h2>
-          <div className="w-16 h-1 bg-vintage-gold mx-auto mb-10" />
-
-          {/* Interactive Carousel */}
-          <Carousel />
-
-          <p className="text-stone-500 text-xs sm:text-sm mt-8 max-w-lg mx-auto leading-relaxed">
-            🌿 Tudo pronto para personalizar com suas próprias fotos, nomes, datas especiais e as frases que marcaram a jornada de vocês.
-          </p>
-        </div>
-      </section>
-
-      {/* SEÇÃO 3 — USOS DO KIT */}
-      <section className="py-20 w-full max-w-6xl mx-auto px-6">
-        <div className="text-center max-w-xl mx-auto mb-16">
-          <span className="text-[10px] font-bold text-vintage-gold-dark uppercase tracking-widest block mb-2">
-            Múltiplos Formatos
-          </span>
-          <h2 className="font-serif-elegant font-bold text-2xl sm:text-3xl text-elegant-black leading-tight">
-            Uma única compra, infinitas formas de declarar seu amor
-          </h2>
-          <div className="w-12 h-0.5 bg-wine-red mx-auto mt-4" />
-        </div>
-
-        {/* 6 Grid items */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {USE_CASES.map((item, index) => (
-            <motion.div
-              key={item.id}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white p-3 pb-5 rounded-xl border border-vintage-beige shadow-sm hover:shadow-lg transition-all text-center relative group"
-            >
-              {/* Image with vintage style borders */}
-              <div className="relative aspect-square overflow-hidden rounded-lg mb-4 bg-stone-100">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <span className="absolute top-2 right-2 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-xs text-stone-700 text-[9px] font-bold uppercase tracking-wider border border-stone-200">
-                  {item.badge}
-                </span>
-              </div>
-              <h4 className="font-serif-elegant font-bold text-xs sm:text-sm md:text-base text-stone-900 leading-tight">
-                {item.title}
-              </h4>
-            </motion.div>
-          ))}
         </div>
       </section>
 
@@ -595,7 +533,7 @@ export default function App() {
                 </div>
                 <div className="flex items-start gap-2.5 sm:col-span-2">
                   <div className="w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">✓</div>
-                  <span><strong>Acesso imediato</strong> por e-mail após a confirmação</span>
+                  <span><strong>Acesso imediato</strong> entregue no seu E-mail e WhatsApp após a confirmação</span>
                 </div>
               </div>
             </div>
@@ -750,7 +688,7 @@ export default function App() {
                   </li>
                   <li className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-vintage-gold shrink-0" />
-                    <span>Acesso imediato por e-mail</span>
+                    <span>Acesso imediato por E-mail e WhatsApp</span>
                   </li>
                   <li className="flex items-center gap-2.5 opacity-40">
                     <X className="w-4 h-4 text-stone-500 shrink-0" />
@@ -816,9 +754,25 @@ export default function App() {
                     <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>Elementos vintage scrapbook (Polaroids e adesivos)</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span><strong>3 BÔNUS EXTRA INCLUSOS GRÁTIS</strong></span>
+                  <li className="space-y-2 border-t border-white/10 pt-3 mt-3">
+                    <div className="flex items-center gap-2.5 text-vintage-gold">
+                      <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span className="font-bold text-xs tracking-wider uppercase">🎁 Inclusos 3 Bônus Exclusivos Grátis:</span>
+                    </div>
+                    <div className="bg-[#322921]/60 rounded-xl p-3 border border-vintage-gold/15 space-y-2 font-sans text-[11px] text-stone-200">
+                      <div className="flex items-start gap-1.5">
+                        <span className="text-emerald-400 font-bold shrink-0">➜ Bônus 1:</span>
+                        <span><strong>Cartinhas de Amor Dobráveis</strong> (Moldes prontos para imprimir e surpreender)</span>
+                      </div>
+                      <div className="flex items-start gap-1.5">
+                        <span className="text-emerald-400 font-bold shrink-0">➜ Bônus 2:</span>
+                        <span><strong>Guia de Impressão Perfeita</strong> (Melhores papéis, tamanhos e configurações de impressora)</span>
+                      </div>
+                      <div className="flex items-start gap-1.5">
+                        <span className="text-emerald-400 font-bold shrink-0">➜ Bônus 3:</span>
+                        <span><strong>Manual de Surpresas no Quarto</strong> (Ideias criativas e baratas de decoração apaixonante)</span>
+                      </div>
+                    </div>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -835,7 +789,7 @@ export default function App() {
                     Apenas <strong className="text-white">R$ 37,00</strong>
                   </div>
                   <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 block mt-1">
-                    ⚡ Tudo liberado imediatamente por e-mail
+                    ⚡ Tudo liberado imediatamente por E-mail e WhatsApp
                   </span>
                 </div>
                 

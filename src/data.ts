@@ -211,7 +211,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'faq3',
     question: 'Como e quando recebo o acesso?',
-    answer: 'O recebimento é instantâneo. Assim que o pagamento for aprovado (via Pix ou Cartão), você receberá um e-mail com os links que dão acesso direto aos templates dentro da sua conta do Canva (gratuita ou Pro).'
+    answer: 'O recebimento é 105% imediato e automatizado. Assim que o pagamento for aprovado (via Pix ou Cartão), você receberá o link com os acessos diretos aos templates tanto por E-mail quanto pelo WhatsApp informado.'
   },
   {
     id: 'faq4',
