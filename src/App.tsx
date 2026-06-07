@@ -73,10 +73,58 @@ const TESTIMONIALS = [
   }
 ];
 
+const PURCHASE_NOTIFICATIONS = [
+  { name: 'Ana Souza', city: 'São Paulo - SP', action: 'acabou de garantir o Kit! 🌹', time: 'Agora mesmo' },
+  { name: 'Bernardo Martins', city: 'Belo Horizonte - MG', action: 'comprou o Combo Completo 🎁', time: 'Há 1 min' },
+  { name: 'Carla Dias', city: 'Rio de Janeiro - RJ', action: 'acabou de adquirir o Kit 💌', time: 'Agora mesmo' },
+  { name: 'Daniel Alves', city: 'Porto Alegre - RS', action: 'garantiu o Kit com Bônus! ✨', time: 'Há 2 min' },
+  { name: 'Elena Costa', city: 'Brasília - DF', action: 'comprou o Kit de R$ 37 ❤️', time: 'Agora mesmo' },
+  { name: 'Felipe Ramos', city: 'Curitiba - PR', action: 'acabou de garantir o seu! 🥰', time: 'Há 3 min' },
+  { name: 'Gisele Neves', city: 'Salvador - BA', action: 'comprou o Combo Completo 🎁', time: 'Agora mesmo' },
+  { name: 'Henrique Lima', city: 'Recife - PE', action: 'garantiu o Kit de R$ 37 💞', time: 'Há 1 min' },
+  { name: 'Isabela Rocha', city: 'Fortaleza - CE', action: 'acabou de adquirir o Kit 💕', time: 'Agora mesmo' },
+  { name: 'João Valente', city: 'Campinas - SP', action: 'garantiu o presente perfeito! 💝', time: 'Agora mesmo' },
+  { name: 'Laura Fontes', city: 'Florianópolis - SC', action: 'comprou o Combo Completo 🎁', time: 'Há 2 min' },
+];
+
 export default function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutPrice, setCheckoutPrice] = useState(37);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  // Sales Simulation Notifications Setup
+  const [activeNotification, setActiveNotification] = useState<typeof PURCHASE_NOTIFICATIONS[0] | null>(null);
+  const [notificationsDisabled, setNotificationsDisabled] = useState(false);
+
+  useEffect(() => {
+    if (notificationsDisabled) return;
+
+    let notificationTimeout: NodeJS.Timeout;
+    let cycleInterval: NodeJS.Timeout;
+
+    // Show a notification every 14 seconds (visible for 5.5 seconds, hidden for 8.5 seconds)
+    const runCycle = () => {
+      const randomIndex = Math.floor(Math.random() * PURCHASE_NOTIFICATIONS.length);
+      setActiveNotification(PURCHASE_NOTIFICATIONS[randomIndex]);
+
+      // Dismiss after 5.5 seconds (quick and non-intrusive)
+      notificationTimeout = setTimeout(() => {
+        setActiveNotification(null);
+      }, 5500);
+    };
+
+    // First trigger after 4 seconds
+    const firstTimeout = setTimeout(() => {
+      runCycle();
+      cycleInterval = setInterval(runCycle, 14000);
+    }, 4000);
+
+    return () => {
+      clearTimeout(firstTimeout);
+      clearTimeout(notificationTimeout);
+      clearInterval(cycleInterval);
+    };
+  }, [notificationsDisabled]);
 
   useEffect(() => {
     const slideTimer = setInterval(() => {
@@ -130,6 +178,44 @@ export default function App() {
   return (
     <div className="relative min-h-screen Selection bg-vintage-cream text-elegant-black font-sans-clean antialiased overflow-x-hidden">
       
+      {/* Sales alert notifications in the top right, with low space profile and close ("X") option */}
+      <AnimatePresence>
+        {activeNotification && !notificationsDisabled && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, x: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="fixed top-16 right-4 sm:right-6 z-[9999] max-w-[280px] sm:max-w-xs bg-white/95 backdrop-blur-md text-stone-900 border border-vintage-gold/25 rounded-xl shadow-xl p-3 pr-8 flex items-center gap-2.5"
+          >
+            <div className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
+              <Check className="w-3.5 h-3.5 stroke-[3]" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[11px] font-bold text-stone-800 tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                {activeNotification.name} ({activeNotification.city})
+              </p>
+              <p className="text-[10px] text-stone-600 leading-tight">
+                {activeNotification.action}
+              </p>
+              <span className="text-[8px] font-mono text-stone-400 block mt-0.5">
+                {activeNotification.time}
+              </span>
+            </div>
+            <button
+              onClick={() => {
+                setNotificationsDisabled(true);
+                setActiveNotification(null);
+              }}
+              title="Fechar notificação"
+              className="absolute top-2 right-2 text-stone-400 hover:text-stone-700 transition cursor-pointer"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Decorative vintage rose dust backdrop elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-burned-rose/5 blur-[100px] pointer-events-none" />
       <div className="absolute top-[1200px] left-0 w-[400px] h-[400px] rounded-full bg-vintage-gold/5 blur-[100px] pointer-events-none" />
@@ -247,56 +333,34 @@ export default function App() {
           </motion.div>
         </div>
 
-        {/* Vintage Scrapbook Collage mockup layout for Hero */}
+        {/* Vintage Scrapbook Collage mockup layout for Hero - Now purely premium text card */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-16 relative mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white/75 backdrop-blur-xs border border-vintage-gold/30 p-4 md:p-8 rounded-2xl shadow-xl"
+          className="mt-16 relative mx-auto max-w-2xl bg-white/75 backdrop-blur-xs border border-vintage-gold/30 p-6 md:p-10 rounded-2xl shadow-xl text-center"
         >
-          {/* Main scrapbook collage image */}
-          <div className="md:col-span-7 relative group">
-            <div className="absolute top-2 left-1/4 w-28 h-6 bg-[#eae4d9]/90 border border-vintage-gold/10 backdrop-blur-xs rotate-[-3deg] z-10 shadow-xs" />
-            <div className="vintage-card rounded-lg overflow-hidden shadow-lg p-3">
-              <img
-                src={IMAGES.heroScrapbook}
-                alt="Kit Memórias do Amor Scrapbook Colage Canvas"
-                referrerPolicy="no-referrer"
-                className="w-full h-auto object-cover rounded-xs filter contrast-[98%] sepia-[4%] transition-transform duration-700 hover:scale-[1.01]"
-              />
-            </div>
-            {/* Custom polaroid floating graphic */}
-            <div className="absolute -bottom-6 -left-4 w-32 md:w-40 bg-white p-2.5 pb-8 border border-stone-200 shadow-xl rotate-[-8deg] rounded-xs hidden sm:block">
-              <img 
-                src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=300" 
-                alt="Te amo" 
-                className="w-full aspect-square object-cover" 
-              />
-              <span className="font-handwritten text-xl text-center block mt-3 text-wine-red">Nós dois ♡</span>
-            </div>
-          </div>
-
           {/* Sincere quick features list in scrapbook look */}
-          <div className="md:col-span-5 text-left space-y-6 px-4 py-6">
-            <h4 className="font-serif-elegant font-bold text-xl text-elegant-black leading-tight border-b border-vintage-beige pb-3">
+          <div className="space-y-6">
+            <h4 className="font-serif-elegant font-bold text-xl sm:text-2xl text-elegant-black leading-tight border-b border-vintage-beige pb-4 inline-block px-4">
               Crie algo único que dure para sempre
             </h4>
             
-            <p className="text-stone-600 text-sm leading-relaxed font-sans-clean">
+            <p className="text-stone-600 text-sm sm:text-base leading-relaxed font-sans-clean max-w-lg mx-auto">
               Esqueça os presentes clichês e descartáveis. Prepare uma declaração de amor que parece ter sido costurada à mão, personalizada com as fotos dos seus melhores dias juntos.
             </p>
 
-            <ul className="space-y-3 font-sans text-xs text-stone-700">
-              <li className="flex items-center gap-2.5">
-                <div className="w-5 h-5 rounded-full bg-[#f3efe9] border border-vintage-gold text-vintage-gold-dark flex items-center justify-center font-bold">✓</div>
+            <ul className="space-y-3.5 font-sans text-xs sm:text-sm text-stone-700 max-w-md mx-auto text-left border-t border-vintage-beige/50 pt-5">
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded-full bg-[#f3efe9] border border-vintage-gold text-vintage-gold-dark flex items-center justify-center font-bold shrink-0 mt-0.5">✓</div>
                 <span>Mais de <strong>50 templates exclusivos editáveis</strong></span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <div className="w-5 h-5 rounded-full bg-[#f3efe9] border border-vintage-gold text-vintage-gold-dark flex items-center justify-center font-bold">✓</div>
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded-full bg-[#f3efe9] border border-vintage-gold text-vintage-gold-dark flex items-center justify-center font-bold shrink-0 mt-0.5">✓</div>
                 <span>Zero complicação: mude tudo com <strong>1 clique</strong></span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <div className="w-5 h-5 rounded-full bg-[#f3efe9] border border-vintage-gold text-vintage-gold-dark flex items-center justify-center font-bold">✓</div>
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded-full bg-[#f3efe9] border border-vintage-gold text-vintage-gold-dark flex items-center justify-center font-bold shrink-0 mt-0.5">✓</div>
                 <span>Para postar no <strong>stories</strong> ou imprimir em <strong>alta definição</strong></span>
               </li>
             </ul>
@@ -483,22 +547,22 @@ export default function App() {
 
       {/* SEÇÃO 6 — O QUE VEM NO KIT */}
       <section className="bg-vintage-beige/30 py-20 border-t border-b border-vintage-beige">
-        <div className="w-full max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="w-full max-w-3xl mx-auto px-6">
+          <div className="space-y-8 text-center">
             
             {/* Checklist elements */}
-            <div className="lg:col-span-6 space-y-6">
+            <div className="space-y-6">
               <span className="text-[10px] font-bold text-wine-red uppercase tracking-widest block">
                 Conteúdo da Caixa
               </span>
-              <h2 className="font-serif-elegant font-bold text-3xl text-elegant-black leading-tight">
+              <h2 className="font-serif-elegant font-bold text-2xl sm:text-3xl text-elegant-black leading-tight">
                 O que você recebe no Kit Memórias do Amor
               </h2>
-              <p className="text-stone-600 text-sm font-sans-clean leading-relaxed mb-8">
+              <p className="text-stone-600 text-sm font-sans-clean leading-relaxed max-w-lg mx-auto">
                 Tudo o que você precisa para criar a homenagem mais romântica do ano em poucos minutos. Um pacote completo de sensibilidade digital.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-sans text-xs text-stone-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-sans text-xs text-stone-800 text-left max-w-2xl mx-auto bg-white/70 backdrop-blur-xs border border-vintage-gold/15 p-6 sm:p-8 rounded-2xl shadow-sm mt-6">
                 <div className="flex items-start gap-2.5">
                   <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">✓</div>
                   <span>Mais de <strong>50 artes</strong> românticas editáveis</span>
@@ -531,25 +595,10 @@ export default function App() {
                   <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">✓</div>
                   <span><strong>Frases prontas</strong> de declaração</span>
                 </div>
-                <div className="flex items-start gap-2.5 sm:col-span-2">
+                <div className="flex items-start gap-2.5 sm:col-span-2 border-t border-vintage-beige/50 pt-3 mt-1">
                   <div className="w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">✓</div>
-                  <span><strong>Acesso imediato</strong> entregue no seu E-mail e WhatsApp após a confirmação</span>
+                  <span><strong>Acesso imediato</strong> entregue no seu E-mail e WhatsApp pós a confirmação</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Collage Showcase Image beside list */}
-            <div className="lg:col-span-6 relative">
-              <div className="absolute top-2 left-6 px-4 py-1 bg-white border border-vintage-gold/25 shadow-xs rotate-[-2deg] z-10 text-[9px] font-mono tracking-widest text-[#a98048]">
-                📸 Kit Templates Canva 2.0
-              </div>
-              <div className="vintage-card rounded-2xl overflow-hidden p-3 shadow-xl">
-                <img
-                  src={IMAGES.previewsBundle}
-                  alt="Pacote de artes Canva Kit Memórias do Amor"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-auto rounded-lg object-cover"
-                />
               </div>
             </div>
 
@@ -611,6 +660,85 @@ export default function App() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 💌 SEÇÃO DE CARTAS ROMÂNTICAS - NOVO CARROSSEL INFINITO */}
+      <section className="bg-gradient-to-b from-[#faf7f2]/10 to-[#f3efe9]/40 border-t border-b border-vintage-gold/20 py-20 relative overflow-hidden">
+        {/* Background paper stamp element for vintage aesthetics */}
+        <div className="absolute top-10 right-10 opacity-[0.03] select-none pointer-events-none font-serif-elegant font-bold text-9xl">
+          Love
+        </div>
+        
+        <div className="w-full max-w-7xl mx-auto px-6 text-center mb-12">
+          <span className="font-handwritten text-4xl text-wine-red font-medium block mb-2">
+            Coleção Especial
+          </span>
+          <h2 className="font-serif-elegant font-bold text-3xl text-stone-900 tracking-tight leading-tight">
+            Cartas de Amor Vintage Editáveis
+          </h2>
+          <p className="text-stone-500 text-xs sm:text-sm max-w-xl mx-auto mt-3 leading-relaxed font-sans-clean">
+            Moldes de cartas exclusivas inspirados em romances clássicos, com selos, rascunhos, envelopes antigos e fontes manuscritas. Tudo já diagramado e pronto para você colocar as suas fotos e palavras.
+          </p>
+          <div className="w-12 h-1 bg-vintage-gold mx-auto mt-6" />
+        </div>
+
+        {/* Endless Marquee Inner flow (Specific to the 8 Custom Love Letters) */}
+        <div className="relative w-full overflow-hidden py-6 flex select-none">
+          {/* Ambient shading gradient covers */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-vintage-cream via-vintage-cream/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-vintage-cream via-vintage-cream/80 to-transparent z-10 pointer-events-none" />
+
+          {/* Endless Marquee Inner flow */}
+          <div className="animate-marquee flex gap-6 sm:gap-8 items-center">
+            {/* Set 1 */}
+            {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
+              <div
+                key={`custom-letter-s1-${i}`}
+                className="w-48 sm:w-60 md:w-72 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
+              >
+                <div className="w-full h-full overflow-hidden rounded-xl relative bg-stone-50">
+                  <img
+                    src={imgUrl}
+                    alt={`Molde de Carta Premium ${i + 1}`}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Glassmorphic watermark tab */}
+                  <span className="absolute bottom-2.5 left-2.5 px-3 py-1 bg-white/95 backdrop-blur-md rounded-lg text-[#580d0d] text-[10px] sm:text-xs font-bold border border-vintage-gold/20 shadow-sm">
+                    Molde de Carta {i + 1}
+                  </span>
+                </div>
+              </div>
+            ))}
+            {/* Set 2 (Duplicated for continuous seamless scrolling) */}
+            {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
+              <div
+                key={`custom-letter-s2-${i}`}
+                className="w-48 sm:w-60 md:w-72 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
+              >
+                <div className="w-full h-full overflow-hidden rounded-xl relative bg-stone-50">
+                  <img
+                    src={imgUrl}
+                    alt={`Molde de Carta Premium ${i + 1}`}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Glassmorphic watermark tab */}
+                  <span className="absolute bottom-2.5 left-2.5 px-3 py-1 bg-white/95 backdrop-blur-md rounded-lg text-[#580d0d] text-[10px] sm:text-xs font-bold border border-vintage-gold/20 shadow-sm">
+                    Molde de Carta {i + 1}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center mt-8">
+          <p className="text-[11px] sm:text-xs text-stone-500 font-mono uppercase tracking-widest flex items-center justify-center gap-1.5 px-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Disponíveis para editar com suas fotos e textos no Canva Grátis
+          </p>
         </div>
       </section>
 

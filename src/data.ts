@@ -9,14 +9,14 @@ export const IMAGES = {
 };
 
 export const INFINITE_CAROUSEL_IMAGES = [
-  'https://i.ibb.co/bMJ4N3qN/TEMPLATE-DIA-DOS-NAMORADOS.png',
-  'https://i.ibb.co/shtxH28/Design-sem-nome-7.png',
-  'https://i.ibb.co/8DyP9FYs/Design-sem-nome-6.png',
-  'https://i.ibb.co/Xv9rp1h/Design-sem-nome-5.png',
-  'https://i.ibb.co/tgckg5v/Design-sem-nome-4.png',
-  'https://i.ibb.co/8nSY2hT8/Design-sem-nome-3.png',
-  'https://i.ibb.co/Wvh49K7s/Design-sem-nome-2.png',
-  'https://i.ibb.co/fdp3BHVg/Design-sem-nome-1.png'
+  'https://i.postimg.cc/MMV8fdbX/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(1).png',
+  'https://i.postimg.cc/2qPD5PvY/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(2).png',
+  'https://i.postimg.cc/yJJKsVDG/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(3).png',
+  'https://i.postimg.cc/pmcvw9LD/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(4).png',
+  'https://i.postimg.cc/TKNxzy3j/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(5).png',
+  'https://i.postimg.cc/pmcvw9Lf/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(6).png',
+  'https://i.postimg.cc/219YsqSn/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(7).png',
+  'https://i.postimg.cc/ZW5ZsP4b/Brown-and-Beige-Vintage-Romantic-Couple-with-Inky-Sketch-Rose-Love-Letter-(8).png'
 ];
 
 export const CAROUSEL_ITEMS: CarouselItem[] = [
