@@ -91,6 +91,7 @@ export default function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutPrice, setCheckoutPrice] = useState(37);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   // Sales Simulation Notifications Setup
   const [activeNotification, setActiveNotification] = useState<typeof PURCHASE_NOTIFICATIONS[0] | null>(null);
@@ -393,13 +394,14 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`infinite-s1-${i}`}
-                className="w-44 sm:w-56 md:w-64 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
+                onClick={() => setLightboxImage(imgUrl)}
+                className="w-52 sm:w-64 md:w-72 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
               >
                 <img
                   src={imgUrl}
                   alt={`Arte Exclusiva ${i + 1}`}
                   referrerPolicy="no-referrer"
-                  style={{ imageRendering: 'high-quality' }}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -408,13 +410,14 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`infinite-s2-${i}`}
-                className="w-44 sm:w-56 md:w-64 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
+                onClick={() => setLightboxImage(imgUrl)}
+                className="w-52 sm:w-64 md:w-72 aspect-[3/4] overflow-hidden rounded-lg sm:rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 transform shrink-0 border border-vintage-gold/15 bg-white flex items-center justify-center cursor-pointer"
               >
                 <img
                   src={imgUrl}
                   alt={`Arte Exclusiva ${i + 1}`}
                   referrerPolicy="no-referrer"
-                  style={{ imageRendering: 'high-quality' }}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -441,13 +444,10 @@ export default function App() {
         {/* Showcase Images list (one under another) */}
         <div className="flex flex-col items-center gap-12 max-w-4xl mx-auto px-4 sm:px-6">
           {SHOWCASE_IMAGES.map((imgUrl, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.05 }}
-              className="w-full bg-[#faf8f5] p-3 sm:p-5 pb-6 sm:pb-8 rounded-3xl border border-vintage-gold/20 shadow-xl overflow-hidden relative group"
+              onClick={() => setLightboxImage(imgUrl)}
+              className="w-full bg-[#faf8f5] p-3 sm:p-5 pb-6 sm:pb-8 rounded-3xl border border-vintage-gold/20 shadow-xl overflow-hidden relative group cursor-pointer hover:shadow-2xl transition-all duration-300"
             >
               {/* Retro decorative tape details at the top of the "Polaroid" mockup frame */}
               {index % 2 === 0 ? (
@@ -461,6 +461,7 @@ export default function App() {
                   src={imgUrl}
                   alt={`Modelo de Arte ${index + 1}`}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                   className="w-full h-auto object-cover transition-transform duration-500 hover:scale-[1.01]"
                 />
               </div>
@@ -472,7 +473,7 @@ export default function App() {
                   Template Romântico Totalmente Editável no Canva
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -539,6 +540,7 @@ export default function App() {
                 src="https://i.postimg.cc/5ykTD174/Chat-GPT-Image-6-de-jun-de-2026-18-46-32.png"
                 alt="Imprima cartas e lembranças de namoro"
                 referrerPolicy="no-referrer"
+                loading="lazy"
                 className="w-full aspect-[16/10] object-cover rounded-lg border border-stone-200"
               />
             </div>
@@ -651,6 +653,7 @@ export default function App() {
                       src={bonus.image}
                       alt={bonus.title}
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                       className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
                     />
                   </div>
@@ -697,14 +700,15 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`custom-letter-s1-${i}`}
-                className="w-56 sm:w-68 md:w-80 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
+                onClick={() => setLightboxImage(imgUrl)}
+                className="w-64 sm:w-76 md:w-96 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
               >
                 <div className="w-full h-full overflow-hidden rounded-xl relative bg-stone-50">
                   <img
                     src={imgUrl}
                     alt={`Molde de Carta Premium ${i + 1}`}
                     referrerPolicy="no-referrer"
-                    style={{ imageRendering: 'high-quality' }}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Glassmorphic watermark tab */}
@@ -718,14 +722,15 @@ export default function App() {
             {INFINITE_CAROUSEL_IMAGES.map((imgUrl, i) => (
               <div
                 key={`custom-letter-s2-${i}`}
-                className="w-56 sm:w-68 md:w-80 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
+                onClick={() => setLightboxImage(imgUrl)}
+                className="w-64 sm:w-76 md:w-96 aspect-[3/4] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 transform shrink-0 border border-vintage-gold/25 bg-white flex flex-col justify-between p-3 cursor-pointer group"
               >
                 <div className="w-full h-full overflow-hidden rounded-xl relative bg-stone-50">
                   <img
                     src={imgUrl}
                     alt={`Molde de Carta Premium ${i + 1}`}
                     referrerPolicy="no-referrer"
-                    style={{ imageRendering: 'high-quality' }}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Glassmorphic watermark tab */}
@@ -976,6 +981,7 @@ export default function App() {
                         src={TESTIMONIALS[currentTestimonial].avatar}
                         alt={TESTIMONIALS[currentTestimonial].name}
                         referrerPolicy="no-referrer"
+                        loading="lazy"
                         className="w-10 h-10 rounded-full object-cover border border-vintage-gold/50"
                       />
                       <div className="text-left">
@@ -1058,11 +1064,7 @@ export default function App() {
           </p>
 
           {/* Guarantee Seal to Boost Conversions - Light Theme version */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          <div
             className="mb-12 max-w-xl mx-auto bg-white border border-vintage-gold/30 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 text-left shadow-md"
           >
             {/* Guarantee Badge Stamp Design */}
@@ -1089,7 +1091,7 @@ export default function App() {
                 Você tem 7 dias inteiros para testar e usar todas as artes no Canva. Se por qualquer motivo não se apaixonar pelos modelos, nós devolvemos seu dinheiro integralmente, sem perguntas ou burocracia.
               </p>
             </div>
-          </motion.div>
+          </div>
 
           <button
             onClick={() => openCheckout(37)}
@@ -1127,6 +1129,70 @@ export default function App() {
             onClose={() => setIsCheckoutOpen(false)} 
             initialPrice={checkoutPrice}
           />
+        )}
+      </AnimatePresence>
+
+      {/* LIGHTBOX FOR HIGH-RESOLUTION IMAGE ZOOM */}
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-[99999] p-4 sm:p-6 flex flex-col items-center justify-center backdrop-blur-md"
+          >
+            {/* Close button with high contrast */}
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all border border-white/25 shadow-lg active:scale-95 z-[100]"
+              aria-label="Fechar visualização"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Main Image Container with zoom ability */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 180 }}
+              className="relative max-w-full max-h-[75vh] sm:max-h-[80vh] flex items-center justify-center p-2 bg-stone-900/60 rounded-2xl border border-white/10"
+            >
+              <img
+                src={lightboxImage}
+                alt="Visualização em Alta Definição"
+                referrerPolicy="no-referrer"
+                className="max-w-full max-h-[70vh] sm:max-h-[75vh] object-contain rounded-lg shadow-2xl selection:bg-transparent"
+                style={{ imageRendering: 'auto' }}
+              />
+            </motion.div>
+
+            {/* Info and action bar */}
+            <div className="mt-6 text-center text-white/95 space-y-3 px-4 z-[100]">
+              <p className="text-sm sm:text-base font-serif-elegant text-vintage-gold tracking-wide">
+                Visualização em Alta Definição (100% Crisp & Nítido)
+              </p>
+              <p className="text-xs text-stone-300 max-w-md font-sans-clean leading-relaxed">
+                Este é o design real em alta resolução. No Canva gratuito você poderá editar todos os elementos (textos, fontes, fotos e cores) mantendo essa nitidez incrível.
+              </p>
+              <div className="flex gap-3 justify-center pt-2">
+                <button
+                  onClick={() => {
+                    window.open(lightboxImage, '_blank');
+                  }}
+                  className="px-5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-semibold border border-white/25 transition-all flex items-center gap-2"
+                >
+                  Ver Link Original ↗
+                </button>
+                <button
+                  onClick={() => setLightboxImage(null)}
+                  className="px-5 py-2 rounded-xl bg-vintage-gold hover:bg-opacity-90 text-stone-900 text-xs font-bold transition-all"
+                >
+                  Fechar Janela
+                </button>
+              </div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 

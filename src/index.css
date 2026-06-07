@@ -79,8 +79,7 @@
 .animate-marquee img {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+  image-rendering: auto;
 }
 
 @media (hover: hover) {
