@@ -52,7 +52,7 @@ const TESTIMONIALS = [
     name: 'Mateus Ramos',
     age: '27 anos',
     city: 'Curitiba - PR',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
     rating: 5,
     text: 'Sempre tive muita dificuldade para criar declarações bonitas ou presentes criativos. O Kit facilitou tudo demais. O modelo de Jornal do Amor e os envelopes prontos são lindos. Imprimi tudo em casa e ficou com uma qualidade profissional inacreditável. Vale cada centavo!'
   },
@@ -119,6 +119,13 @@ export default function App() {
     setIsCheckoutOpen(true);
   };
 
+  const scrollToOffers = () => {
+    const element = document.getElementById('pricing-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
   return (
@@ -139,8 +146,8 @@ export default function App() {
           Desconto exclusivo encerra em: <strong className="text-white text-xs">{formattedTime}</strong>
         </span>
         <button 
-          onClick={() => openCheckout(37)}
-          className="ml-2 bg-vintage-gold hover:bg-white text-stone-950 font-sans text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider transition-all duration-300"
+          onClick={scrollToOffers}
+          className="ml-2 bg-vintage-gold hover:bg-white text-stone-950 font-sans text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider transition-all duration-300 cursor-pointer"
         >
           Aproveitar R$37
         </button>
@@ -229,7 +236,7 @@ export default function App() {
             className="space-y-4"
           >
             <button
-              onClick={() => openCheckout(37)}
+              onClick={scrollToOffers}
               className="px-8 py-4 bg-wine-red hover:bg-wine-dark hover:scale-[1.02] text-white rounded-full text-sm md:text-base font-bold tracking-widest uppercase shadow-lg shadow-wine-red/25 hover:shadow-xl transition-all cursor-pointer duration-300 inline-flex items-center gap-3 active:scale-[0.99]"
             >
               <Heart className="w-5 h-5 fill-current" /> Quero criar minha homenagem
@@ -636,21 +643,21 @@ export default function App() {
                 {bonus.badge}
               </div>
 
-              <div>
-                <div className="w-9 h-9 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center text-wine-red mb-5 mt-1">
+              <div className="flex flex-col items-center">
+                <div className="w-9 h-9 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center text-wine-red mb-5 mt-1 mx-auto">
                   {index === 0 && <Feather className="w-4.5 h-4.5" />}
                   {index === 1 && <Printer className="w-4.5 h-4.5" />}
                   {index === 2 && <Gift className="w-4.5 h-4.5" />}
                 </div>
-                <h4 className="font-serif-elegant font-bold text-stone-900 text-base md:text-lg mb-2">
+                <h4 className="font-serif-elegant font-bold text-stone-900 text-base md:text-lg mb-2 text-center">
                   {bonus.title}
                 </h4>
-                <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed">
+                <p className="text-stone-600 text-xs sm:text-sm font-sans-clean leading-relaxed text-center">
                   {bonus.description}
                 </p>
 
                 {bonus.image && (
-                  <div className="mt-4 overflow-hidden rounded-xl border border-vintage-gold/20 bg-stone-50">
+                  <div className="mt-4 overflow-hidden rounded-xl border border-vintage-gold/20 bg-stone-50 w-full">
                     <img
                       src={bonus.image}
                       alt={bonus.title}
@@ -661,7 +668,7 @@ export default function App() {
                 )}
               </div>
 
-              <div className="mt-5 pt-3 border-t border-stone-100 flex items-center gap-1.5 text-emerald-800 text-xs font-bold font-mono">
+              <div className="mt-5 pt-3 border-t border-stone-100 flex items-center justify-center gap-1.5 text-emerald-800 text-xs font-bold font-mono">
                 <Check className="w-3.5 h-3.5" /> GRÁTIS NO KIT
               </div>
             </div>
@@ -678,6 +685,41 @@ export default function App() {
         <div className="w-full max-w-4xl mx-auto px-6 text-center relative z-10">
           
           <Heart className="w-10 h-10 text-wine-red fill-current mx-auto mb-6 animate-pulse" />
+
+          {/* Canva Free Sample Banner */}
+          <div className="mb-12 p-6 sm:p-8 rounded-3xl bg-amber-50/5 border border-vintage-gold/20 flex flex-col md:flex-row items-center justify-between text-left gap-6 max-w-3xl mx-auto relative overflow-hidden">
+            {/* Delicate gold badge on top corner */}
+            <div className="absolute top-0 right-0 bg-vintage-gold text-stone-950 text-[8px] font-bold font-mono px-3 py-1 uppercase tracking-widest rounded-bl-xl shadow-xs">
+              100% Grátis
+            </div>
+            
+            <div className="flex-1 space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-vintage-gold/20 border border-[#cea972]/30 text-vintage-gold-dark text-[10px] font-bold rounded-md uppercase tracking-wider">
+                  Amostra Grátis
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              </div>
+              <h3 className="font-serif-elegant font-bold text-lg sm:text-xl text-[#faf7f2] leading-snug">
+                Quer testar antes de escolher?
+              </h3>
+              <p className="text-stone-300 text-xs font-sans-clean leading-relaxed max-w-xl">
+                Preparamos uma amostra especial com <strong className="text-vintage-gold">8 artes editáveis gratuitas</strong> para você experimentar. Crie, edite e sinta como é fácil e rápido direto no Canva.
+              </p>
+            </div>
+            
+            <div className="shrink-0 w-full md:w-auto">
+              <a
+                href="https://canva.link/2oseupl7p3hiyfe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-vintage-gold hover:bg-white text-stone-950 font-sans text-xs font-bold rounded-full uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+              >
+                <span>Baixar Amostra Grátis</span>
+                <ChevronRight className="w-4 h-4 shrink-0" />
+              </a>
+            </div>
+          </div>
 
           {/* Two-column pricing selection */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left mt-8">
