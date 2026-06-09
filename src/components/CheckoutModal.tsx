@@ -22,6 +22,7 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
   const [installments, setInstallments] = useState('1');
 
   const [paymentStatus, setPaymentStatus] = useState<'editing' | 'processing' | 'success'>('editing');
+  const [formError, setFormError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -46,10 +47,11 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
   const handleSimulatePayment = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !email || !phone) {
-      alert('Por favor, preencha seu nome, e-mail e WhatsApp para receber as artes!');
+      setFormError('Por favor, preencha seu nome, e-mail e WhatsApp para receber as artes!');
       return;
     }
 
+    setFormError(null);
     setPaymentStatus('processing');
     setTimeout(() => {
       setPaymentStatus('success');
@@ -168,6 +170,14 @@ export default function CheckoutModal({ isOpen, onClose, initialPrice = 37 }: Ch
 
             {/* Custom Payment Form */}
             <form onSubmit={handleSimulatePayment} className="mt-5 space-y-4">
+              {formError && (
+                <div className="p-3.5 bg-rose-50 border border-wine-red/20 text-wine-red text-[11px] sm:text-xs rounded-xl flex items-start gap-2 animate-pulse leading-snug">
+                  <AlertCircle className="w-4 h-4 text-wine-red shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold">Atenção:</span> {formError}
+                  </div>
+                </div>
+              )}
               {/* Core contacts */}
               <div className="grid grid-cols-1 gap-3">
                 <div>

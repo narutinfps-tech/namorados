@@ -155,16 +155,44 @@ export default function App() {
   }, []);
 
   const openCheckout = (price: number) => {
+    let baseUrl = "";
     if (price === 37) {
-      window.location.href = "https://pay.wiapy.com/2sdhbAnLqC";
+      baseUrl = "https://pay.wiapy.com/2sdhbAnLqC";
+    } else if (price === 10) {
+      baseUrl = "https://pay.wiapy.com/YVWVqlcWL";
+    }
+
+    if (baseUrl) {
+      const currentParams = window.location.search;
+      if (currentParams) {
+        const separator = baseUrl.includes("?") ? "&" : "?";
+        window.location.href = `${baseUrl}${separator}${currentParams.replace(/^\?/, "")}`;
+      } else {
+        window.location.href = baseUrl;
+      }
       return;
     }
-    if (price === 10) {
-      window.location.href = "https://pay.wiapy.com/YVWVqlcWL";
-      return;
-    }
+
     setCheckoutPrice(price);
     setIsCheckoutOpen(true);
+  };
+
+  const getCheckoutUrl = (price: number) => {
+    let baseUrl = "";
+    if (price === 37) {
+      baseUrl = "https://pay.wiapy.com/2sdhbAnLqC";
+    } else if (price === 10) {
+      baseUrl = "https://pay.wiapy.com/YVWVqlcWL";
+    }
+    
+    if (baseUrl && typeof window !== "undefined") {
+      const currentParams = window.location.search;
+      if (currentParams) {
+        const separator = baseUrl.includes("?") ? "&" : "?";
+        return `${baseUrl}${separator}${currentParams.replace(/^\?/, "")}`;
+      }
+    }
+    return baseUrl;
   };
 
   const scrollToOffers = () => {
@@ -849,12 +877,12 @@ export default function App() {
                   </span>
                 </div>
                 
-                <button
-                  onClick={() => openCheckout(10)}
-                  className="w-full py-3 bg-[#3a3530] hover:bg-[#4d4741] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer active:scale-[0.99]"
+                <a
+                  href={getCheckoutUrl(10)}
+                  className="w-full block text-center py-3 bg-[#3a3530] hover:bg-[#4d4741] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer active:scale-[0.99]"
                 >
                   Garantir por R$ 10,00
-                </button>
+                </a>
               </div>
             </div>
 
@@ -930,12 +958,12 @@ export default function App() {
                   </span>
                 </div>
                 
-                <button
-                  onClick={() => openCheckout(37)}
-                  className="w-full py-3.5 bg-wine-red hover:bg-[#a12323] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md shadow-wine-red/25 cursor-pointer active:scale-[0.99]"
+                <a
+                  href={getCheckoutUrl(37)}
+                  className="w-full block text-center py-3.5 bg-wine-red hover:bg-[#a12323] text-white rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md shadow-wine-red/25 cursor-pointer active:scale-[0.99]"
                 >
                   Quero o Kit Completo
-                </button>
+                </a>
               </div>
             </div>
 
@@ -1093,12 +1121,12 @@ export default function App() {
             </div>
           </div>
 
-          <button
-            onClick={() => openCheckout(37)}
-            className="px-8 py-4 bg-wine-red hover:bg-wine-dark text-white rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.01]"
+          <a
+            href={getCheckoutUrl(37)}
+            className="inline-block px-8 py-4 bg-wine-red hover:bg-wine-dark text-white rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.01]"
           >
             Quero meu Kit Memórias do Amor
-          </button>
+          </a>
         </div>
       </section>
 
